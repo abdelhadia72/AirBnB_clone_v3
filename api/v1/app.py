@@ -10,6 +10,7 @@ from os import getenv
 from models import storage
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
+from flask import jsonify
 
 app = Flask('__name__')
 app.register_blueprint(app_views)
@@ -19,7 +20,7 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 @app.errorhandler(404)
 def notFound(err):
     """ handler error 404 """
-    return make_response(jsonify({"error": "Not found"}), 404)
+    return jsonify({"error": "Not found"}), 404
 
 
 @app.teardown_appcontext
