@@ -70,9 +70,9 @@ def post_amenity_by_place_(place_id):
     if place is None:
         abort(404)
     if not request.json:
-        abort(400, 'Not a JSON')
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
     if 'name' not in request.json:
-        abort(400, 'Missing name')
+        return make_response(jsonify({'error': 'Missing name'}), 400)
     data = request.get_json()
     amenity = Amenity(**data)
     amenity.save()
