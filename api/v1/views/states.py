@@ -27,23 +27,19 @@ def get_state(state_id):
                  strict_slashes=False)
 def delete_state(state_id):
     '''DELETE State'''
-    all_states = storage.all("State").values()
-    states = [obj.to_dict() for obj in all_states if obj.id == state_id]
-    if states == []:
+    state = storage.get(State, state_id)
+    if state is None:
         abort(404)
-    states.remove(states[0])
-    for obj in all_states:
-        if obj.id == state_id:
-            storage.delete(obj)
-            storage.save()
-    return jsonify({}), 200
+    storage.delete(state)
+    storage.save()
+    return make_response(jsonify({}), 200)
 
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     '''POST a State'''
     if not request.get_json():
-        return abort("Not a JSON", 400)
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
     if 'name' not in request.get_json():
         return make_response(jsonify({'error': 'Missing name'}), 400)
     data = request.get_json()
