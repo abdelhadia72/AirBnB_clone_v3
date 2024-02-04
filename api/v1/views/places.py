@@ -12,11 +12,8 @@ from models.city import City
                     strict_slashes=False)
 def get_places(city_id):
     """Retrieves the list of all Place objects of a City"""
-    cities = storage.all("City").values()
-    for _ in cities:
-        if _.id == city_id:
-            city = _
-    if not _ :
+    city = storage.get(City, city_id)
+    if city is None:
         abort(404)
     places = [place.to_dict() for place in city.places]
     return jsonify(places)
@@ -26,10 +23,9 @@ def get_places(city_id):
 @app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
 def get_place(place_id):
     """Retrieves a Place object"""
-    place = storage.get(Place, place_id)
-    if place is None:
-        abort(404)
-    return jsonify(place.to_dict()) # dictionary of place object
+    places = storage.all("Place").values()
+    place = [i.to_dict() for i in places if i.id == place_id]
+    return jsonify(place) # dictionary of place object
 
 
 @app_views.route('/places/<place_id>', methods=['DELETE'],
