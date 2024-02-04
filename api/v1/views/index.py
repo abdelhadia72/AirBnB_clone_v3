@@ -12,6 +12,16 @@ from models.user import User
 from models import storage
 
 
+all_classess = {
+    "amenities": Amenity,
+    "cities": City,
+    "places": Place,
+    "reviews": Review,
+    "states": State,
+    "users": User
+}
+
+
 @app_views.route("/status", methods=['GET'], strict_slashes=False)
 def status():
     """test status OK"""
@@ -21,17 +31,6 @@ def status():
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """return the count of all objects"""
-    amenities = storage.count(Amenity)
-    cities = storage.count(City)
-    places = storage.count(Place)
-    reviews = storage.count(Review)
-    states = storage.count(State)
-    users = storage.count(User)
-    return {
-        "amenities": amenities,
-        "cities": cities,
-        "places": places,
-        "reviews": reviews,
-        "states": states,
-        "users": users
-    }
+    for key, value in all_classess.items():
+        all_classess[key] = storage.count(value)
+    return jsonify(all_classess)
