@@ -12,11 +12,15 @@ from models.city import City
                     strict_slashes=False)
 def get_places(city_id):
     """Retrieves the list of all Place objects of a City"""
-    city = storage.get(City, city_id)
-    if city is None:
+    cities = storage.all("City").values()
+    for _ in cities:
+        if _.id == city_id:
+            city = _
+    if not _ :
         abort(404)
     places = [place.to_dict() for place in city.places]
-    return jsonify(places) # list of dictionaries of places in city
+    return jsonify(places)
+    # list of dictionaries of places in city
 
 
 @app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
