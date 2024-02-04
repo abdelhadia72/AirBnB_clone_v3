@@ -6,6 +6,7 @@ from api.v1.views import app_views
 from models import storage
 from models.place import Place
 from models.city import City
+from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
@@ -49,15 +50,15 @@ def post_place(city_id):
     if city is None:
         abort(404)
     data = request.get_json()
-    if data is None:
-        return make_response('Not a JSON', 400)
+    if not data:
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
     if 'user_id' not in data:
-        return make_response('Missing user_id', 400)
-    user = storage.get(User, data['user_id'])
+        return make_response(jsonify({'error': 'Missing user_id'}), 400)
+    user = storage.get(User, data["user_id"])
     if user is None:
         abort(404)
     if 'name' not in data:
-        return make_response('Missing name', 400)
+        return make_response(jsonify({'error': 'Missing name'}), 400)
     data['city_id'] = city_id
     place = Place(**data)
     place.save()
