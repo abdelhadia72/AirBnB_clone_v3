@@ -31,6 +31,7 @@ def status():
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """return the count of all objects"""
+    new_classes = {}
     for key, value in all_classess.items():
-        all_classess[key] = storage.count(value)
-    return jsonify(all_classess)
+        new_classes[key] = storage.count(value)
+    return jsonify(new_classes)
