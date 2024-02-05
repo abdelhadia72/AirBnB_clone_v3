@@ -310,7 +310,8 @@
         "updated_at": "2024-02-05T01:05:47.360410",
         "amenity_ids": [
             "07846c9c-08e2-49c5-bedd-d3d65dc72a9f",
-            "a0d8c218-ecb9-4176-89e7-85f53fadd244"
+            "a0d8c218-ecb9-4176-89e7-85f53fadd244",
+            "a5838e59-54b6-46b8-99be-7e1a095c73e5"
         ],
         "__class__": "Place"
     }
