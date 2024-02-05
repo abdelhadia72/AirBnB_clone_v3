@@ -2,23 +2,35 @@
 """Amenity objects that handles all default RestFul API actions"""
 
 from api.v1.views import app_views
-from flask import jsonify, abort, request
+from flask import jsonify, abort, request, make_response
 from models import storage
 from models.place import Place
 from models.amenity import Amenity
 import os
 
 
+# @app_views.route('/places/<place_id>/amenities', methods=['GET'],
+#                  strict_slashes=False)
+# def get_amenities_(place_id):
+#     """Retrieves the list of all Amenity objects of a Place"""
+#     place = storage.get(Place, place_id)
+#     if place is None:
+#         abort(404)
+#     amenities = []
+#     for amenity in place.amenities:
+#         amenities.append(amenity.to_dict())
+#     return jsonify(amenities)
+    
+#     # return jsonify({"status": "OK"})
+
 @app_views.route('/places/<place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
 def get_amenities_(place_id):
     """Retrieves the list of all Amenity objects of a Place"""
-    place = storage.get("Place", place_id)
-    if place is None:
+    place = storage.get(Place, place_id)
+    if not place:
         abort(404)
-    amenities = []
-    for amenity in place.amenities:
-        amenities.append(amenity.to_dict())
+    amenities = [storage.get(Amenity, id).to_dict() for id in place.amenity_ids]
     return jsonify(amenities)
 
 
