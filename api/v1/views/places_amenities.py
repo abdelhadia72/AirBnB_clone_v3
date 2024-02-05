@@ -16,7 +16,8 @@ def get_amenities_(place_id):
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
-    amenities = [storage.get(Amenity, id).to_dict() for id in place.amenity_ids]
+    amenities = [storage.get(Amenity, id).to_dict()
+                 for id in place.amenity_ids]
     return jsonify(amenities)
 
 
@@ -60,6 +61,7 @@ def post_amenity_(place_id, amenity_id):
         place.amenity_ids.append(amenity_id)
     storage.save()
     return jsonify(amenity.to_dict()), 201
+
 
 '''
 @app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'],
