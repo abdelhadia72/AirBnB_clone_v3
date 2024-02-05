@@ -292,14 +292,59 @@
         "updated_at": "2024-02-05T01:05:47.360410",
         "amenity_ids": [
             "07846c9c-08e2-49c5-bedd-d3d65dc72a9f",
-            "999123-08e2-49c5-bedd-d3d65dc72a9f"
+            "8955dafd-f8e1-43cf-9214-125ccd6d702c"
         ],
         "__class__": "Place"
     },
-    "Amenity.999123-08e2-49c5-bedd-d3d65dc72a9f": {
-        "id": "999123-08e2-49c5-bedd-d3d65dc72a9f",
+    "Amenity.111111-08e2-49c5-bedd-d3d65dc72a9f": {
+        "id": "111111-08e2-49c5-bedd-d3d65dc72a9f",
         "created_at": "2024-02-05T01:06:11.781457",
         "updated_at": "2024-02-05T01:06:11.781672",
         "__class__": "Amenity"
+    },
+    "Amenity.8955dafd-f8e1-43cf-9214-125ccd6d702c": {
+        "id": "8955dafd-f8e1-43cf-9214-125ccd6d702c",
+        "created_at": "2024-02-05T10:28:20.790384",
+        "updated_at": "2024-02-05T10:28:20.790425",
+        "__class__": "Amenity"
+    },
+    "Amenity.9ce43e13-1f7a-4a91-b5b1-00f2482c5afa": {
+        "id": "9ce43e13-1f7a-4a91-b5b1-00f2482c5afa",
+        "created_at": "2024-02-05T10:40:26.906652",
+        "updated_at": "2024-02-05T10:40:26.906686",
+        "__class__": "Amenity"
+    },
+    "Amenity.dd0e5670-51ee-4db7-b31b-bdc535f27d75": {
+        "id": "dd0e5670-51ee-4db7-b31b-bdc535f27d75",
+        "created_at": "2024-02-05T10:40:30.940369",
+        "updated_at": "2024-02-05T10:40:30.940418",
+        "__class__": "Amenity"
+    },
+    "Amenity.b9e8d83f-ee51-4955-a442-400b601691c9": {
+        "id": "b9e8d83f-ee51-4955-a442-400b601691c9",
+        "created_at": "2024-02-05T10:40:31.514347",
+        "updated_at": "2024-02-05T10:40:31.514394",
+        "__class__": "Amenity"
+    },
+    "City.d720de44-a2b0-438a-ae40-cfb684a281c0": {
+        "id": "d720de44-a2b0-438a-ae40-cfb684a281c0",
+        "created_at": "2024-02-05T10:40:52.838916",
+        "updated_at": "2024-02-05T10:40:52.839003",
+        "__class__": "City"
+    },
+    "Place.ad139f64-7695-4a08-844f-2f504863c97a": {
+        "city_id": "0001",
+        "user_id": "0001",
+        "name": "My little house",
+        "number_rooms": 4,
+        "number_bathrooms": 2,
+        "max_guest": 10,
+        "price_by_night": 300,
+        "latitude": 37.773972,
+        "longitude": -122.431297,
+        "created_at": "2024-02-05T11:33:40.211744",
+        "updated_at": "2024-02-05T11:33:40.213283",
+        "id": "ad139f64-7695-4a08-844f-2f504863c97a",
+        "__class__": "Place"
     }
 }
