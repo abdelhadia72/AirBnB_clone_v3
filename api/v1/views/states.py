@@ -14,7 +14,8 @@ def list_states():
     return jsonify(list_states)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_state(state_id):
     '''GET State '''
     state = storage.get(State, state_id)
@@ -23,11 +24,10 @@ def get_state(state_id):
     return jsonify(state.to_dict())
 
 
-# found error on db failed to delete state ?
 @app_views.route('/states/<state_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete_state(state_id):
-    '''DELETE State'''
+def delete_user(state_id):
+    """Deletes a State object"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
