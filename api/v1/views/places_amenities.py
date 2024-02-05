@@ -8,21 +8,12 @@ from models.place import Place
 from models.amenity import Amenity
 import os
 
-
-# @app_views.route('/places/<place_id>/amenities', methods=['GET'],
-#                  strict_slashes=False)
-# def get_amenities_(place_id):
-#     """Retrieves the list of all Amenity objects of a Place"""
-#     place = storage.get(Place, place_id)
-#     if place is None:
-#         abort(404)
-#     amenities = []
-#     for amenity in place.amenities:
-#         amenities.append(amenity.to_dict())
-#     return jsonify(amenities)
-    
-#     # return jsonify({"status": "OK"})
-
+'''
+Here what I did I get the Place by it's id and 
+then I look to the list in that palce named amenity_ids
+that hold all ids of amenitys and I start geting all amenitys 
+and return them into a list and return it as a json object
+'''
 @app_views.route('/places/<place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
 def get_amenities_(place_id):
@@ -44,12 +35,14 @@ def delete_amenity_(place_id, amenity_id):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
-    if amenity not in place.amenities:
+    if amenity_id not in place.amenity_ids:
         abort(404)
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         place.amenities.remove(amenity)
     else:
         place.amenity_ids.remove(amenity_id)
+        amenity_to_delete = storage.get(Amenity, amenity_id)
+        storage.delete(amenity_to_delete)
     storage.save()
     return jsonify({}), 200
 
@@ -115,3 +108,6 @@ def delete_amenity_by_place_(place_id, amenity_id):
         place.amenity_ids.remove(amenity_id)
     storage.save()
     return jsonify({}), 200
+
+
+
