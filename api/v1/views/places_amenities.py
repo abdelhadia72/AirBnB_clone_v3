@@ -20,9 +20,12 @@ def get_amenities_(place_id):
                  for id in place.amenity_ids]
     return jsonify(amenities)
 
+
 """
 We need also to remove it from db
 """
+
+
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_amenity_(place_id, amenity_id):
