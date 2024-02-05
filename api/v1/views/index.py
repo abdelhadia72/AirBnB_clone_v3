@@ -1,25 +1,9 @@
 #!/usr/bin/python3
 """index file"""
 
-from flask import jsonify
 from api.v1.views import app_views
-from models.state import State
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.user import User
+from flask import jsonify
 from models import storage
-
-
-all_classess = {
-    "amenities": Amenity,
-    "cities": City,
-    "places": Place,
-    "reviews": Review,
-    "states": State,
-    "users": User
-}
 
 
 @app_views.route("/status", methods=['GET'], strict_slashes=False)
@@ -31,7 +15,16 @@ def status():
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """return the count of all objects"""
-    new_classes = {}
-    for key, value in all_classess.items():
-        new_classes[key] = storage.count(value)
-    return jsonify(new_classes)
+    data = {
+        "amenities": storage.count("Amenity"),
+        "cities": storage.count("City"),
+        "places": storage.count("Place"),
+        "reviews": storage.count("Review"),
+        "states": storage.count("State"),
+        "users": storage.count("User"),
+    }
+
+    response = jsonify(data)
+    response.status_code = 200
+
+    return (response)
