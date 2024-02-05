@@ -40,5 +40,3 @@ def count():
         count = storage.count(classx)
         alls[classes.get(classx)] = count
     return jsonify(alls)
-
-
