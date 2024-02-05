@@ -36,25 +36,25 @@ def delete_amenity(amenity_id):
 
 @app_views.route("/amenities", methods=['POST'], strict_slashes=False)
 def create_amenity():
-    if not request.get_json():
-        return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    if 'name' not in request.get_json():
-        return make_response(jsonify({'error': 'Missing name'}), 400)
     data = request.get_json()
+    if not data:
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+    if 'name' not in data:
+        return make_response(jsonify({'error': 'Missing name'}), 400)
     new_amenity = Amenity(**data)
     new_amenity.save()
     return make_response(jsonify(new_amenity.to_dict()), 201)
 
 
-@app_views.route("/amenities/<amenity_id>", methods=['PUT'],
-                 strict_slashes=False)
+@app_views.route("/amenities/<amenity_id>",
+                 methods=['PUT'], strict_slashes=False)
 def update_amenity(amenity_id):
     amenitie = storage.get(Amenity, amenity_id)
     if amenitie is None:
         abort(404)
-    if not request.get_json():
-        return make_response(jsonify({'error': 'Not a JSON'}), 400)
     data = request.get_json()
+    if not data:
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
     for key, value in data.items():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(amenitie, key, value)
