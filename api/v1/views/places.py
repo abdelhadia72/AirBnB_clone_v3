@@ -95,7 +95,7 @@ def post_places_search():
         for amenity_id in amenities:
             amenity = storage.get(Amenity, amenity_id)
             if amenity:
-                amenity_objects.append(amenity.to_dict())  # Convert Amenity to dictionary
+                amenity_objects.append(amenity.to_dict())
         if not states and not cities:
             places = storage.all('Place').values()
         else:
